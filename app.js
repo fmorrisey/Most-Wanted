@@ -38,7 +38,7 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    displayPerson(Person);
+    displayPerson(person);
     break;
     case "family":
     // TODO: get person's family
@@ -86,16 +86,16 @@ function displayPeople(people){
 function displayPerson(person){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
-  let personInfo = "First Name: " + person.firstName + "\n";
-  personInfo += "Last Name: " + person.lastName + "\n";
-  personInfo+="gender: "+person.gender + "\n";
-  personInfo += "dob: " + person.dob + "\n";
-  personInfo += "height: " + person.height + "\n";
-  personInfo += "weight: " + person.weight + "\n";
-  personInfo += "eyeColor: " + person.eyeColor + "\n";
-  personInfo += "occupation" + person.occupation + "\n";
-  personInfo += "parents" + person.parents + "\n";
-  personInfo += "currentSPouse" + person.currentSPouse + "\n";
+  let personInfo = "First Name: " + person[0].firstName + "\n";
+  personInfo += "Last Name: " + person[0].lastName + "\n";
+  personInfo+="gender: "+person[0].gender + "\n";
+  personInfo += "dob: " + person[0].dob + "\n";
+  personInfo += "height: " + person[0].height + "\n";
+  personInfo += "weight: " + person[0].weight + "\n";
+  personInfo += "eyeColor: " + person[0].eyeColor + "\n";
+  personInfo += "occupation" + person[0].occupation + "\n";
+  personInfo += "parents" + person[0].parents + "\n";
+  personInfo += "currentSPouse" + person[0].currentSPouse + "\n";
   
   //  REP Done! TODO: finish getting the rest of the information to display
   alert(personInfo);
