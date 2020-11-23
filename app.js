@@ -28,34 +28,45 @@ function app(people){
 function mainMenu(person, people){
 
   /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
+  var currentPerson = person;
 
   if(!person){
     alert("Could not find that individual.");
     return app(people); // restart
   }
-
-  let displayOption = prompt("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+  let displayOption = prompt("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'spouse', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
 
   switch(displayOption){
     case "info":
-    displayPerson(person);
+      displayPerson(person);
     break;
+    
     case "family":
-    // TODO: get person's family
+      // TODO: get person's family
     break;
+    
+    case "spouse":
+      var spouse = searchForSpouse(currentPerson, people);
+      displayPerson(spouse);
+    break;
+    
     case "descendants":
     // TODO: get person's descendants
     break;
+    
     case "restart":
-    app(people); // restart
+      app(people); // restart
     break;
+    
     case "quit":
     return; // stop execution
+    
     default:
     return mainMenu(person, people); // ask again
   }
 }
 
+// Search for person by first/last name
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", chars);
   let lastName = promptFor("What is the person's last name?", chars);
@@ -72,8 +83,27 @@ function searchByName(people){
   return foundPerson;
 }
 
+// Search for person's spouse
+function searchForSpouse(currentPerson, people){
+  
+  let foundSpouse = people.filter(function(person){
+    if(currentPerson[0].id === person.currentSpouse){
+      return true;
+    }
+    else {
+      return false;
+    }
+  })
+  return foundSpouse; 
+}
+
 function searchByTraits(people) {
   
+}
+
+// search for person's descendants  
+function searchForDescendents(person, people){
+
 }
 
 // alerts a list of people
@@ -93,9 +123,9 @@ function displayPerson(person){
   personInfo += "height: " + person[0].height + "\n";
   personInfo += "weight: " + person[0].weight + "\n";
   personInfo += "eyeColor: " + person[0].eyeColor + "\n";
-  personInfo += "occupation" + person[0].occupation + "\n";
-  personInfo += "parents" + person[0].parents + "\n";
-  personInfo += "currentSPouse" + person[0].currentSPouse + "\n";
+  personInfo += "occupation " + person[0].occupation + "\n";
+  personInfo += "parents " + person[0].parents + "\n";
+  personInfo += "currentSpouse " + person[0].currentSpouse + "\n";
   
   //  REP Done! TODO: finish getting the rest of the information to display
   alert(personInfo);
