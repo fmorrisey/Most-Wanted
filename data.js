@@ -156,7 +156,7 @@ const data = [
 		"parents": [401222887],
 		"currentSpouse": 159819275
 	},
-	{
+	{	// multiple connections
 		"id": 159819275,
 		"firstName": "Jasmine",
 		"lastName": "Bob",
