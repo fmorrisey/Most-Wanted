@@ -9,6 +9,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+*006_Most_Wanted_User_Stories.docx
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
