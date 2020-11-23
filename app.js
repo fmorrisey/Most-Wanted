@@ -88,7 +88,16 @@ function displayPerson(person){
   // height, weight, age, name, occupation, eye color.
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
-  // TODO: finish getting the rest of the information to display
+  personInfo+="gender: "+person.gender + "\n";
+  personInfo += "dob: " + person.dob + "\n";
+  personInfo += "height: " + person.height + "\n";
+  personInfo += "weight: " + person.weight + "\n";
+  personInfo += "eyeColor: " + person.eyeColor + "\n";
+  personInfo += "occupation" + person.occupation + "\n";
+  personInfo += "parents" + person.parents + "\n";
+  personInfo += "currentSPouse" + person.currentSPouse + "\n";
+  
+  //  REP Done! TODO: finish getting the rest of the information to display
   alert(personInfo);
 }
 
