@@ -51,6 +51,8 @@ function mainMenu(person, people){
     break;
     
     case "descendants":
+      var children = searchForDescendents(currentPerson, people);
+      displayPeople(children)
     // TODO: get person's descendants
     break;
     
@@ -102,8 +104,16 @@ function searchByTraits(people) {
 }
 
 // search for person's descendants  
-function searchForDescendents(person, people){
-
+function searchForDescendents(currentPerson, people){
+let foundChildren = people.filter(function(person){
+  if(currentPerson[0].id === person.parents[0] || currentPerson[0].id=== person.parents[1]){
+    return true; //
+  }
+  else{
+    return false;
+  }
+})
+return foundChildren;
 }
 
 // alerts a list of people
