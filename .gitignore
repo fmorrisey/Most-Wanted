@@ -10,6 +10,7 @@
 *.userosscache
 *.sln.docstates
 *006_Most_Wanted_User_Stories.docx
+*launch.json
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
