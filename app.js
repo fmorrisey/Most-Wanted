@@ -12,7 +12,7 @@ function app(people){
       searchResults = searchByName(people);
       break;
     case 'no':
-      searchResults= searchByTrait(people);
+      searchResults= searchByTraits(people);
       // TODO: search by traits 
       break;
       default:
