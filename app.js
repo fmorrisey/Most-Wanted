@@ -30,7 +30,7 @@ function app(people){
   }
 }
 
-function traitsOrCriteria(person, people){
+function traitsOrCriteria(people){
   
   let displayOption = promptFor("Search by 'traits' or 'criteria'", chars).toLowerCase();
   
@@ -75,7 +75,7 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-      displayPerson(person);
+      displayP(person);
       return mainMenu(person, people);
     break;
     
@@ -140,27 +140,27 @@ function searchByCriteria(people){
       
       case "gender":
         var result = searchByGender(people);
-        displayPerson(result);
+        displayPeople(result);
       break;
               
       case "eye color":
         var result = searchByEyeColor(people);
-        displayPerson(result);
+        displayPeople(result);
       break;
 
       case "height":
         var result = searchByHeight(people);
-        displayPerson(result);   
+        displayPeople(result);   
       break;
 
       case "weight":
         var result = searchByWeight(people);
-        displayPerson(result);
+        displayPeople(result);
       break;
 
       case "occupation":
         var result = searchByOccupation(people);
-        displayPerson(result);
+        displayPeople(result);
       break;
       
       default:
