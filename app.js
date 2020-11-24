@@ -39,21 +39,26 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
       displayPerson(person);
+      return mainMenu(person, people);
     break;
     
     case "family":
-      // TODO: get person's family
+      var family = searchForFamily(currentPerson, people);
+      displayPerson(family);
+      return mainMenu(person, people);
+
     break;
     
     case "spouse":
       var spouse = searchForSpouse(currentPerson, people);
       displayPerson(spouse);
+      return mainMenu(person, people);
     break;
     
     case "descendants":
       var children = searchForDescendants(currentPerson, people);
       displayPeople(children);
-    // TODO: get person's descendants
+      return mainMenu(person, people);
     break;
     
     case "restart":
@@ -136,8 +141,17 @@ function searchForDescendants(currentPerson, people){
       return false;
     }
   })
+  
   return foundChildren;
 }
+
+// function checkNotFound(people){
+//   if (people === undefined || people.length === 0){
+//     people.firstName = "Not";
+//     people.lastName = "Found";
+//   }
+//   return people;
+//}
 
 // alerts a list of people
 function displayPeople(people){
