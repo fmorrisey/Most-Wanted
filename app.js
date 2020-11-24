@@ -98,8 +98,8 @@ function searchByName(people){
 
 function searchByTraits(people) {
   let gender = promptFor("What is the person's gender (male/female)?'", chars);  
-  let height = promptFor("What is the person's height (inches)?'", chars);  
-  let weight = promptFor("What is the person's weight (lbs)?'", chars);  
+  let height = promptFor("What is the person's height (inches)?'", nums);  
+  let weight = promptFor("What is the person's weight (lbs)?'", nums);  
   let eyeColor = promptFor("What is the person's eye color?'", chars);  
   
   let foundPeople = people.filter(function(person){
@@ -207,14 +207,30 @@ function yesNo(input){
 
 // helper function to pass in as default promptFor validation
 function chars(input){
-  // Should only be alphanumeric
-  return true; // default validation only
+  var code, i, len;
+
+  for (i = 0, len = input.length; i < len; i++) {
+    code = input.charCodeAt(i);
+    if (!(code > 64 && code < 91) && // upper alpha (A-Z)
+        !(code > 96 && code < 123)) { // lower alpha (a-z)
+      return false;
+    }
+  }
+  return true;
 }
+
 
 // helper function to pass in as defaults promptFor validation
 function nums(input){
-  // Should only be numerical characters
-  return true; // default validation only
+  var code, i, len;
+
+  for (i = 0, len = input.length; i < len; i++) {
+    code = input.charCodeAt(i);
+    if (!(code > 47 && code < 58)){ // numeric (0-9)
+      return false;
+    }
+  }
+  return true;
 }
 
 String.prototype.capitalize = function() {
