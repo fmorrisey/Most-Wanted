@@ -69,9 +69,10 @@ function mainMenu(person, people){
     "Found " +
       person.firstName +
       " " +
-      person.lastName +
-      " . Do you want to know their 'info', 'spouse', 'parents', 'siblings', 'antecedents', " +
-      "'family', or 'descendants'? Type the option you want or 'restart' or 'quit'",
+      person.lastName + 
+      ". \n" + 
+      "Do you want to know their: 'info', 'spouse', 'parents', 'siblings', 'antecedents', " +
+      "'family', or 'descendants'? \n" + "Type the option you want or enter 'restart' or 'quit'",
     chars
   );
 
@@ -98,7 +99,7 @@ function mainMenu(person, people){
       return mainMenu(person, people);
       break;
 
-    case "siblings":
+    case "siblings" || "sibs":
       var siblings = searchForSiblings(currentPerson, people);
       displayPeople(siblings);
       return mainMenu(person, people);
@@ -454,15 +455,14 @@ function displaySpouse(currentPerson, spouse, people) {
     currentPerson = currentPerson[0];
   }
 
-  let personInfo = + "Spouse: \n"
-  +"First Name: " + spouse.firstName + "\n"
-  + "Last Name: " + spouse.lastName + "\n"
-  + "gender: " + spouse.gender + "\n"
-  +  "dob: " + spouse.dob + "\n"
-  +  "height: " + spouse.height + "\n"
-  + "weight: " + spouse.weight + "\n"
-  +  "eye Color: " + spouse.eyeColor + "\n"
-  +  "occupation " + spouse.occupation + "\n";
+  let personInfo = 
+    "Spouse Name: " + spouse.firstName + " " + spouse.lastName + "\n"
+  + "Gender: " + spouse.gender + "\n"
+  + "DOB: " + spouse.dob + "\n"
+  + "Height: " + spouse.height + "\n"
+  + "Weight: " + spouse.weight + "\n"
+  + "Eye Color: " + spouse.eyeColor + "\n"
+  + "Occupation " + spouse.occupation + "\n";
   
   if (spouse.parents[0] === undefined) {
     personInfo += "Parents: Not found \n";
@@ -471,9 +471,7 @@ function displaySpouse(currentPerson, spouse, people) {
     personInfo += "Parents: " + parents[0].firstName + " & " + parents[1].firstName 
   + " " + parents[1].lastName + "\n";
   }
-  
-  personInfo += "Spouse: " + currentPerson.firstName + " " + currentPerson.lastName;
-  
+    
   //  REP Done! TODO: finish getting the rest of the information to display
   alert(personInfo);
 }
@@ -486,15 +484,14 @@ function displayPerson(person, people) {
     person = person[0];
   }
 
-  let personInfo = "First Name: " + person.firstName + "\n"
-  + "Last Name: " + person.lastName + "\n"
-  + "gender: " + person.gender + "\n"
-  +  "dob: " + person.dob + "\n"
-  +  "height: " + person.height + "\n"
-  + "weight: " + person.weight + "\n"
-  +  "eye Color: " + person.eyeColor + "\n"
-  +  "occupation " + person.occupation + "\n";
-
+  let personInfo = "INFORMATION: \n"
+  + "Name: " + person.firstName + " " + person.lastName + "\n"
+  + "Gender: " + person.gender + "\n"
+  + "DOB: " + person.dob + "\n"
+  + "Height: " + person.height + "\n"
+  + "Weight: " + person.weight + "\n"
+  + "Eye Color: " + person.eyeColor + "\n"
+  + "Occupation " + person.occupation + "\n";
   if (person.parents[0] === undefined) {
     personInfo += "Parents: Not found \n";
   } else {
