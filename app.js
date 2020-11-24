@@ -37,13 +37,13 @@ function traitsOrCriteria(people){
   switch(displayOption){
       
       case 'traits':
-        searchResults= searchByTraits(people);
+        var searchResults = searchByTraits(people);
         displayPeople(searchResults);
         return app(people);
         break;
 
       case 'criteria':
-        searchResults= searchByCriteria(people);
+        var searchResults = searchByCriteria(people);
         displayPeople(searchResults);
         return app(people);
         break;
@@ -134,7 +134,7 @@ function searchByName(people){
 // Search for person by individual criteria
 function searchByCriteria(people){
 
-  let criteria = promptFor("What criteria would you like to search on: 'gender' , 'eye color' , 'height' , 'weight' ", chars).toLowerCase();
+  let criteria = promptFor("What criteria would you like to search on: 'gender' , 'eyecolor' , 'height' , 'weight' ", chars).toLowerCase();
     
     switch(criteria){
       
@@ -143,14 +143,14 @@ function searchByCriteria(people){
         displayPeople(result);
       break;
               
-      case "eye color":
+      case "eyecolor":
         var result = searchByEyeColor(people);
         displayPeople(result);
       break;
 
       case "height":
         var result = searchByHeight(people);
-        displayPeople(result);   
+        displayPeople(result);
       break;
 
       case "weight":
@@ -207,7 +207,7 @@ function searchByEyeColor(people) {
 // Search for person by height
 function searchByHeight(people){
 
-  let height = promptFor("Please enter height in inches", nums);
+  let height =  parseInt(promptFor("Please enter height in inches", nums));
     
   let foundPerson = people.filter(function(person){
     if(person.height === height){
@@ -224,7 +224,7 @@ function searchByHeight(people){
 // Search for person by weight lbs
 function searchByWeight(people){
 
-  let gender = promptFor("Please enter weight in lbs", nums);
+  let weight = parseInt(promptFor("Please enter weight in lbs", nums));
     
   let foundPerson = people.filter(function(person){
     if(person.weight === weight){
@@ -260,7 +260,7 @@ function searchByTraits(people) {
   let gender = promptFor("What is the person's gender (male/female)?'", maleFemale);  
   let height = promptFor("What is the person's height (inches)?'", nums);  
   let weight = promptFor("What is the person's weight (lbs)?'", nums);  
-  let eyeColor = promptFor("What is the person's eye color?'", chars);  
+  let eyeColor = promptFor("What is the person's eye color?'", eyeCInput);  
   
   let foundPeople = people.filter(function(person){
     if(person.gender === gender){
@@ -308,7 +308,7 @@ function searchForSpouse(currentPerson, people){
 function searchForDescendants(currentPerson, people, descendants = []){
     
   let foundChildren = people.filter(function(person){
-    if(currentPerson.id === person.parents[0] || currentPerson.id=== person.parents[1]){
+    if(currentPerson.id === person.parents[0] || currentPerson.id === person.parents[1]){
       return true; //
     }
     else{
@@ -365,6 +365,16 @@ function promptFor(question, valid){
   } while(!response || !valid(response));
   
   return response;
+}
+
+// helper function to pass into promptFor to validate eye color answers
+function eyeCInput(input){
+  return input.toLowerCase() == "hazel" 
+          || input.toLowerCase() == "brown"
+          || input.toLowerCase() == "black"
+          || input.toLowerCase() == "blue"
+          || input.toLowerCase() == "green";
+          
 }
 
 // helper function to pass into promptFor to validate yes/no answers
