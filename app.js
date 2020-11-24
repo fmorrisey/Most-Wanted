@@ -51,7 +51,7 @@ function mainMenu(person, people){
     break;
     
     case "descendants":
-      var children = searchForDescendents(currentPerson, people);
+      var children = searchForDescendants(currentPerson, people);
       displayPeople(children)
     // TODO: get person's descendants
     break;
@@ -85,6 +85,24 @@ function searchByName(people){
   return foundPerson;
 }
 
+function searchByTraits(people) {
+  let gender = promptFor("What is the person's gender (male/female)?'", chars);  
+  let height = promptFor("What is the person's height (inches)?'", chars);  
+  let weight = promptFor("What is the person's weight (lbs)?'", chars);  
+  let eyeColor = promptFor("What is the person's eye Color?'", chars);  
+  
+  let foundPerson = people.filter(function(person){
+    if(person.gender === gender && person.gender === gender){
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  // TODO: find the person using the name they entered
+  return foundPerson;
+
+}
 // Search for person's spouse
 function searchForSpouse(currentPerson, people){
   
@@ -99,21 +117,18 @@ function searchForSpouse(currentPerson, people){
   return foundSpouse; 
 }
 
-function searchByTraits(people) {
-  
-}
 
 // search for person's descendants  
-function searchForDescendents(currentPerson, people){
-let foundChildren = people.filter(function(person){
-  if(currentPerson[0].id === person.parents[0] || currentPerson[0].id=== person.parents[1]){
-    return true; //
-  }
-  else{
-    return false;
-  }
-})
-return foundChildren;
+function searchForDescendants(currentPerson, people){
+  let foundChildren = people.filter(function(person){
+    if(currentPerson[0].id === person.parents[0] || currentPerson[0].id=== person.parents[1]){
+      return true; //
+    }
+    else{
+      return false;
+    }
+  })
+  return foundChildren;
 }
 
 // alerts a list of people
