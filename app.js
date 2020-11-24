@@ -23,11 +23,13 @@ function app(people){
   }
   
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
+  
   if (searchResults.length === 1) {
     mainMenu(searchResults[0], people);
   } else {
     displayPeople(searchResults);
   }
+  
 }
 
 function traitsOrCriteria(people){
@@ -43,21 +45,15 @@ function traitsOrCriteria(people){
         break;
 
       case 'criteria':
-        var searchResults = searchByCriteria(people);
-        displayPeople(searchResults);
-        return app(people);
+        searchByCriteria(people);
         break;
         
         default:
           return traitsOrCriteria(person, people); // ask again
 
   }
-  // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
-  mainMenu(searchResults, people);
-
+ 
 }
-
-
 
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
@@ -75,13 +71,13 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-      displayP(person);
+      displayPerson(person);
       return mainMenu(person, people);
     break;
     
     case "family":
       var family = searchForFamily(currentPerson, people);
-      displayPerson(family);
+      displayPeople(family);
       return mainMenu(person, people);
 
     break;
@@ -110,6 +106,8 @@ function mainMenu(person, people){
   }
 }
 
+//SEARCHES
+//#region
 // Search for person by first/last name
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", chars);
@@ -134,7 +132,7 @@ function searchByName(people){
 // Search for person by individual criteria
 function searchByCriteria(people){
 
-  let criteria = promptFor("What criteria would you like to search on: 'gender' , 'eyecolor' , 'height' , 'weight' ", chars).toLowerCase();
+  let criteria = promptFor("What criteria would you like to search on: 'gender' , 'eyecolor' , 'height' , 'weight' , 'restart'", chars).toLowerCase();
     
     switch(criteria){
       
@@ -163,13 +161,16 @@ function searchByCriteria(people){
         displayPeople(result);
       break;
       
+      case "restart":
+        app(people); // restart
+      break;
+
       default:
         return searchByCriteria(people);
     }
 
     return app(people);
 }
-
 
 // Search for person by gender
 function searchByGender(people){
@@ -300,9 +301,9 @@ function searchForSpouse(currentPerson, people){
       return false;
     }
   })
-  return foundSpouse; 
+  return foundSpouse[0]; 
 }
-
+//#endregion
 
 // search for person's descendants  
 function searchForDescendants(currentPerson, people, descendants = []){
@@ -325,6 +326,24 @@ function searchForDescendants(currentPerson, people, descendants = []){
   return descendants;
 }
 
+// search for person's descendants  
+function searchForFamily(currentPerson, people){
+  
+  let foundParents = people.filter(function(person){
+    if(currentPerson.parents[0] === person.parents[0] || currentPerson.parents[0] === person.parents[1] 
+      || currentPerson.parents[1] === person.parents[0] ||  currentPerson.parents[1] === person.parents[1]){
+      return true; //
+    }
+    else{
+      return false;
+    }
+  })
+    
+  return foundParents;
+}
+
+
+
 // function checkNotFound(people){
 //   if (people === undefined || people.length === 0){
 //     people.firstName = "Not";
@@ -345,14 +364,14 @@ function displayPerson(person){
   // height, weight, age, name, occupation, eye color.
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
-  personInfo+="gender: "+person.gender + "\n";
+  personInfo += "gender: "+person.gender + "\n";
   personInfo += "dob: " + person.dob + "\n";
   personInfo += "height: " + person.height + "\n";
   personInfo += "weight: " + person.weight + "\n";
-  personInfo += "eyeColor: " + person.eyeColor + "\n";
+  personInfo += "eye Color: " + person.eyeColor + "\n";
   personInfo += "occupation " + person.occupation + "\n";
   personInfo += "parents " + person.parents + "\n";
-  personInfo += "currentSpouse " + person.currentSpouse + "\n";
+  personInfo += "current Spouse " + person.currentSpouse + "\n";
   
   //  REP Done! TODO: finish getting the rest of the information to display
   alert(personInfo);
