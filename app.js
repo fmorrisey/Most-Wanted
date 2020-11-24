@@ -24,8 +24,6 @@ function app(people) {
       break;
   }
 
-  // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
-
   if (searchResults.length === 1) {
     mainMenu(searchResults[0], people);
   } else if (searchResults.length === 0) {
@@ -57,10 +55,15 @@ function traitsOrCriteria(people) {
 }
 
 // Menu function to call once you find who you are looking for
-function mainMenu(currentPerson, people) {
+function mainMenu(person, people){
+
   /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
-  
-  
+  var currentPerson = person;
+
+  if(!person){
+    alert("Could not find that individual.");
+    return app(people); // restart
+  }
 
   let displayOption = promptFor(
     "Found " +
@@ -483,14 +486,15 @@ function displayPerson(person, people) {
     person = person[0];
   }
 
-  let personInfo = "First Name: " + spouse.firstName + "\n"
-  + "Last Name: " + spouse.lastName + "\n"
-  + "gender: " + spouse.gender + "\n"
-  +  "dob: " + spouse.dob + "\n"
-  +  "height: " + spouse.height + "\n"
-  + "weight: " + spouse.weight + "\n"
-  +  "eye Color: " + spouse.eyeColor + "\n"
-  +  "occupation " + spouse.occupation + "\n";
+  let personInfo = "First Name: " + person.firstName + "\n"
+  + "Last Name: " + person.lastName + "\n"
+  + "gender: " + person.gender + "\n"
+  +  "dob: " + person.dob + "\n"
+  +  "height: " + person.height + "\n"
+  + "weight: " + person.weight + "\n"
+  +  "eye Color: " + person.eyeColor + "\n"
+  +  "occupation " + person.occupation + "\n";
+
   if (person.parents[0] === undefined) {
     personInfo += "Parents: Not found \n";
   } else {
@@ -505,11 +509,6 @@ function displayPerson(person, people) {
     let spouse = searchForSpouse(person, people);
     personInfo += "Spouse: " + spouse[0].firstName + " " + spouse[0].lastName;
   }
-  
-  // personInfo +=
-  //   "Current Spouse: " + spouse.firstName + " " + spouse.lastName + "\n";
-
-  //  REP Done! TODO: finish getting the rest of the information to display
   
   alert(personInfo);
 }
