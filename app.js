@@ -11,10 +11,12 @@ function app(people){
     case 'yes':
       searchResults = searchByName(people);
       break;
-    case 'no':
+    
+      case 'no':
       searchResults= searchByTraits(people);
-      // TODO: search by traits 
+      displayPerson(searchResults);
       break;
+      
       default:
     app(people); // restart app
       break;
@@ -34,6 +36,7 @@ function mainMenu(person, people){
     alert("Could not find that individual.");
     return app(people); // restart
   }
+  
   let displayOption = prompt("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'spouse', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
 
   switch(displayOption){
@@ -97,11 +100,21 @@ function searchByTraits(people) {
   let gender = promptFor("What is the person's gender (male/female)?'", chars);  
   let height = promptFor("What is the person's height (inches)?'", chars);  
   let weight = promptFor("What is the person's weight (lbs)?'", chars);  
-  let eyeColor = promptFor("What is the person's eye Color?'", chars);  
+  let eyeColor = promptFor("What is the person's eye color?'", chars);  
   
   let foundPeople = people.filter(function(person){
-    if(person.gender === gender 
-      || person.height === height
+    if(person.gender === gender){
+      
+        return true;
+    }
+    else{
+
+      return false;
+    }
+  })
+
+  foundPeople = foundPeople.filter(function(person){
+    if(person.height === height
       || person.weight === weight
       || person.eyeColor === eyeColor){
       
@@ -194,6 +207,13 @@ function yesNo(input){
 
 // helper function to pass in as default promptFor validation
 function chars(input){
+  // Should only be alphanumeric
+  return true; // default validation only
+}
+
+// helper function to pass in as defaults promptFor validation
+function nums(input){
+  // Should only be numerical characters
   return true; // default validation only
 }
 
