@@ -52,7 +52,7 @@ function mainMenu(person, people){
     
     case "descendants":
       var children = searchForDescendants(currentPerson, people);
-      displayPeople(children)
+      displayPeople(children);
     // TODO: get person's descendants
     break;
     
@@ -73,6 +73,9 @@ function searchByName(people){
   let firstName = promptFor("What is the person's first name?", chars);
   let lastName = promptFor("What is the person's last name?", chars);
 
+  firstName = firstName.capitalize(); 
+  lastName = lastName.capitalize();
+  
   let foundPerson = people.filter(function(person){
     if(person.firstName === firstName && person.lastName === lastName){
       return true;
@@ -91,16 +94,21 @@ function searchByTraits(people) {
   let weight = promptFor("What is the person's weight (lbs)?'", chars);  
   let eyeColor = promptFor("What is the person's eye Color?'", chars);  
   
-  let foundPerson = people.filter(function(person){
-    if(person.gender === gender && person.gender === gender){
-      return true;
+  let foundPeople = people.filter(function(person){
+    if(person.gender === gender 
+      || person.height === height
+      || person.weight === weight
+      || person.eyeColor === eyeColor){
+      
+        return true;
     }
     else{
+
       return false;
     }
   })
-  // TODO: find the person using the name they entered
-  return foundPerson;
+ 
+  return foundPeople;
 
 }
 // Search for person's spouse
@@ -161,6 +169,7 @@ function promptFor(question, valid){
   do{
     var response = prompt(question).trim();
   } while(!response || !valid(response));
+  
   return response;
 }
 
@@ -172,4 +181,8 @@ function yesNo(input){
 // helper function to pass in as default promptFor validation
 function chars(input){
   return true; // default validation only
+}
+
+String.prototype.capitalize = function() {
+  return this.charAt(0).toUpperCase() + this.slice(1);
 }
