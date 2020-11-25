@@ -157,7 +157,7 @@ function searchByName(people) {
 // Search for person by individual criteria
 function searchByCriteria(people) {
   let criteria = promptFor(
-    "What criteria would you like to search on: 'gender' , 'eyecolor' , 'height' , 'weight' , 'restart'",
+    "What criteria would you like to search on: 'gender' , 'eyecolor' , 'height' , 'weight' , 'occupation', 'restart'",
     chars
   ).toLowerCase();
 
@@ -233,10 +233,11 @@ function searchByEyeColor(people) {
 
 // Search for person by height
 function searchByHeight(people) {
-  let height = parseInt(promptFor("Please enter height in inches", nums));
-
+  let height = parseInt(promptFor("Please enter height in inches\nresults will be all people within 7% of height entered", nums));
+  let heightLower = height - parseInt(height * 0.035);
+  let heightUpper = height + parseInt(height * 0.035);
   let foundPerson = people.filter(function (person) {
-    if (person.height === height) {
+    if (person.height > heightLower && person.height < heightUpper) {
       return true;
     } else {
       return false;
@@ -248,10 +249,17 @@ function searchByHeight(people) {
 
 // Search for person by weight lbs
 function searchByWeight(people) {
-  let weight = parseInt(promptFor("Please enter weight in lbs", nums));
+  let weight = parseInt(
+    promptFor(
+      "Please enter weight in lbs\nresults will be all people within 10% of weight entered",
+      nums
+    )
+  );
+  let weightLower = weight - parseInt(weight * 0.05);
+  let weightUpper = weight + parseInt(weight * 0.05);
 
   let foundPerson = people.filter(function (person) {
-    if (person.weight === weight) {
+    if (person.weight > weightLower && person.weight < weightUpper) {
       return true;
     } else {
       return false;
@@ -263,10 +271,13 @@ function searchByWeight(people) {
 
 // Search for person by occupation
 function searchByOccupation(people) {
-  let gender = promptFor("Please enter person's Occupation", chars);
+  let occupation = promptFor(
+    "Please enter person's Occupation - options below:\n" + 
+    "'assistant' , 'architect', 'doctor' , 'landscaper' ," +
+    " 'nurse' , 'politician' , 'programmer' , 'student' ,", chars);
 
   let foundPerson = people.filter(function (person) {
-    if (person.Occupation === Occupation) {
+    if (person.occupation === occupation) {
       return true;
     } else {
       return false;
