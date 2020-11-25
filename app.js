@@ -40,12 +40,14 @@ function traitsOrCriteria(people) {
 
   switch (displayOption) {
     case "traits":
+    case "trait":
       var searchResults = searchByTraits(people);
       displayPeople(searchResults);
       return app(people);
       break;
 
     case "criteria":
+    case "cri":
       searchByCriteria(people);
       break;
 
@@ -99,19 +101,22 @@ function mainMenu(person, people){
       return mainMenu(person, people);
       break;
 
-    case "siblings" || "sibs":
+    case "siblings":
+    case "sibs":
       var siblings = searchForSiblings(currentPerson, people);
       displayPeople(siblings);
       return mainMenu(person, people);
       break;
 
-    case "antecedents" || "ante":
+    case "antecedents":
+    case "ante":
       var ante = searchForAntecedents(currentPerson, people);
       displayPeople(ante);
       return mainMenu(person, people);
       break;
 
-    case "descendants" || "desc":
+    case "descendants":
+    case "desc":
       var desc = searchForDescendants(currentPerson, people);
       displayPeople(desc);
       return mainMenu(person, people);
